@@ -35,7 +35,9 @@ class ProductController extends Controller
             'code' => 'required|integer|max:20|unique:products,code',
             'brands_id' => 'integer|exists:brands,id',
             'subcatigories_id' => 'integer|exists:subcatigories,id',
+            'image' => 'required|image'
         ]);
+
         //upload image
         // insert into database
         //redirect
