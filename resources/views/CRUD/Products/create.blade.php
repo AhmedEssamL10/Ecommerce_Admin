@@ -49,31 +49,13 @@
             @error('code')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
-            <div class="col-md-6">
-                <div class="mb-3">
-                    <input type="text" name="detiles_en" class="form-control" placeholder="Details En "
-                        value="{{ old('detiles_en') }}">
-                </div>
-            </div>
-            @error('detiles_en')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-            <div class="col-md-6">
-                <div class="mb-3">
-                    <input type="text" name="detiles_ar" class="form-control" placeholder="Details Ar "
-                        value="{{ old('detiles_ar') }}">
-                </div>
-            </div>
-            @error('detiles_ar')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
 
             <div class="col-md-6">
                 <div class="mb-3">
                     <label for="status">Status</label>
                     <select name="status" id="status" class="form-control">
-                        <option value="1">Active</option>
-                        <option value="0">Not Active</option>
+                        <option @selected(old('status') == 1) value="1">Active</option>
+                        <option @selected(old('status') == 0) value="0">Not Active</option>
 
                     </select>
                 </div>
@@ -87,7 +69,8 @@
                     <label for="brands_id">Brand</label>
                     <select name="brands_id" id="brands_id" class="form-control">
                         @foreach ($brands as $brand)
-                            <option value="{{ $brand->id }}">{{ $brand->en_name }}- {{ $brand->ar_name }}</option>
+                            <option @selected(old('brands_id') == $brand->id) value="{{ $brand->id }}">{{ $brand->en_name }}-
+                                {{ $brand->ar_name }}</option>
                         @endforeach
                     </select>
 
@@ -101,7 +84,8 @@
                     <label for="subcatigories_id">Subcatigories</label>
                     <select name="subcatigories_id" id="subcatigories_id" class="form-control">
                         @foreach ($subcatigories as $subcatigory)
-                            <option value="{{ $subcatigory->id }}">{{ $subcatigory->en_name }}
+                            <option @selected(old('subcatigories_id') == $subcatigory->id) value="{{ $subcatigory->id }}">
+                                {{ $subcatigory->en_name }}
                                 -{{ $subcatigory->ar_name }}
                             </option>
                         @endforeach
@@ -113,6 +97,26 @@
             @error('subcatigories_id')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="detiles_en">En Detiles</label>
+                    <textarea name="detiles_en" id="detiles_en" cols="70" rows="10">{{ old('detiles_en') }}</textarea>
+                </div>
+            </div>
+
+            @error('detiles_en')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="detiles_ar">Ar Detiles</label>
+                    <textarea name="detiles_ar" id="detiles_ar" cols="70" rows="10">{{ old('detiles_ar') }}</textarea>
+                </div>
+            </div>
+            @error('detiles_ar')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+
         </div>
 
         <div class="mb-3">

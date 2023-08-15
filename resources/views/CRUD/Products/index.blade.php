@@ -2,7 +2,11 @@
 @section('title', 'Products Table')
 @section('name', 'Ahmed Essam')
 @section('contant')
-
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
     <!-- Main content -->
     <section class="content">

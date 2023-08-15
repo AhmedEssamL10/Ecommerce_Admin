@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -32,15 +33,39 @@ class ProductController extends Controller
             'price' => 'required|max:6',
             'detiles_en' => 'required|max:255',
             'detiles_ar' => 'required|max:255',
-            'code' => 'required|integer|max:20|unique:products,code',
+            'code' => 'required|integer|unique:products,code',
             'brands_id' => 'integer|exists:brands,id',
             'subcatigories_id' => 'integer|exists:subcatigories,id',
             'image' => 'required|image'
         ]);
 
         //upload image
+        $imageName = '';
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $extention = $image->getClientOriginalExtension();
+            $imageName = 'product-' . uniqid() . '.' . $extention;
+            Storage::disk('external')->put($imageName, file_get_contents($image));
+            $path = public_path('images/product');
+            $image->move($path, $imageName);
+        }
         // insert into database
+        DB::table('products')->insert([
+            'en_name' => $request->en_name,
+            'ar_name' => $request->ar_name,
+            'quantity' => $request->quantity,
+            'status' => $request->status,
+            'price' => $request->price,
+            'detiles_en' => $request->detiles_en,
+            'detiles_ar' => $request->detiles_ar,
+            'code' => $request->code,
+            'brands_id' => $request->brands_id,
+            'subcatigories_id' => $request->subcatigories_id,
+            'image' => $imageName,
+
+        ]);
         //redirect
+        return  redirect(route('products.index'))->with('success', 'the product create successfully');
     }
     public function edit($id)
     {
