@@ -64,7 +64,8 @@
                                             <td>
 
                                                 {{-- <div class="row"> --}}
-                                                <a href="" class="btn btn-outline-danger">
+                                                <a href="{{ route('products.delete', $product->id) }}"
+                                                    class="btn btn-outline-danger">
                                                     Delete</a>
                                                 <a href="{{ route('products.edit', $product->id) }}"
                                                     class="btn btn-outline-warning">

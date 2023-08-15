@@ -1,9 +1,11 @@
 @extends('layouts.parent')
 @section('title', 'Edit Product')
 @section('contant')
-    <form method="POST" enctype="multipart/form-data">
-        <div class="row">
-            @foreach ($products as $product)
+    @foreach ($products as $product)
+        <form method="POST" enctype="multipart/form-data" action="{{ route('products.update', $product->id) }}">
+            @csrf
+            @method('PUT')
+            <div class="row">
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="en_name">En name</label>
@@ -11,6 +13,9 @@
                             value=" {{ old('en_name') ?? $product->en_name }}">
                     </div>
                 </div>
+                @error('en_name')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="ar_name">Ar Name</label>
@@ -18,6 +23,9 @@
                             value="{{ old('ar_name') ?? $product->ar_name }}">
                     </div>
                 </div>
+                @error('ar_name')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="price">Price</label>
@@ -25,6 +33,9 @@
                             value="{{ old('price') ?? $product->price }}">
                     </div>
                 </div>
+                @error('price')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="quantity">Quantity</label>
@@ -32,6 +43,9 @@
                             value="{{ old('quantity') ?? $product->quantity }}">
                     </div>
                 </div>
+                @error('quantity')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="code">Code</label>
@@ -39,16 +53,22 @@
                             value="{{ old('code') ?? $product->code }}">
                     </div>
                 </div>
+                @error('code')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="status">Status</label>
-                        <select name="ststus" id="status" class="form-control">
+                        <select name="status" id="status" class="form-control">
                             <option @selected($product->status == 1) value="1">Active</option>
                             <option @selected($product->status == 0) value="0">Not Active</option>
 
                         </select>
                     </div>
                 </div>
+                @error('status')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="detiles_en">Detiles En</label>
@@ -56,6 +76,9 @@
                             value="{{ old('detiles_en') ?? $product->detiles_en }}">
                     </div>
                 </div>
+                @error('detiles_en')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="detiles_ar">Detiles Ar</label>
@@ -63,11 +86,14 @@
                             value="{{ old('detiles_ar') ?? $product->detiles_ar }}">
                     </div>
                 </div>
+                @error('detiles_ar')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
                 <div class="col-md-6">
                     <div class="mb-3">
 
-                        <label for="brand_id">Brand</label>
-                        <select name="brand_id" id="brand_id" class="form-control">
+                        <label for="brands_id">Brand</label>
+                        <select name="brands_id" id="brand_id" class="form-control">
                             @foreach ($brands as $brand)
                                 <option @selected($product->brands_id == $brand->id) value="{{ $brand->id }}">{{ $brand->en_name }}-
                                     {{ $brand->ar_name }}</option>
@@ -76,6 +102,9 @@
 
                     </div>
                 </div>
+                @error('brands_id')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="subcatigories_id">Subcatigories</label>
@@ -91,15 +120,19 @@
                         </select>
                     </div>
                 </div>
-            @endforeach
-        </div>
-        <div class="mb-3">
-            <img src="{{ asset('images/product/' . $product->image) }}" style="width: 20%" alt="">
-            <input class="form-control" type="file" id="formFile" name="image"
-                value="{{ old('image') ?? $product->image }}">
-        </div>
-
-        <button type="submit" class="btn btn-primary">Update</button>
-    </form>
-
+                @error('subcatigories_id')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="mb-3">
+                <img src="{{ asset('images/product/' . $product->image) }}" style="width: 20%" alt="">
+                <input class="form-control" type="file" id="formFile" name="image"
+                    value="{{ old('image') ?? $product->image }}">
+            </div>
+            @error('image')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    @endforeach
 @endsection
