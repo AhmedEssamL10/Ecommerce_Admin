@@ -92,7 +92,8 @@ class ProductController extends Controller
         ]);
 
         //upload image
-        $imageName = $request->image;
+        $dbimage = DB::table('products')->select('image')->where('id', '=', $id)->first();
+        $imageName = $dbimage->image;
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $extention = $image->getClientOriginalExtension();
