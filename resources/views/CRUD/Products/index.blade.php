@@ -2,19 +2,12 @@
 @section('title', 'Products Table')
 @section('name', 'Ahmed Essam')
 @section('contant')
-    @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
-
+    @include('includes.messages')
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-
-
                     <div class="card">
 
                         <!-- /.card-header -->

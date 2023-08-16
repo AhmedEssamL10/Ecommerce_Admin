@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -22,22 +23,9 @@ class ProductController extends Controller
         $subcatigories = DB::table('subcatigories')->select('id', 'en_name', 'ar_name')->orderBy('en_name')->get();
         return view('CRUD.Products.create', compact('brands', 'subcatigories'));
     }
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
         //validation
-        $validation = $request->validate([
-            'en_name' => 'required|max:32',
-            'ar_name' => 'required|max:32',
-            'quantity' => 'required|max:3',
-            'status' => 'required|in:0,1',
-            'price' => 'required|max:6',
-            'detiles_en' => 'required|max:255',
-            'detiles_ar' => 'required|max:255',
-            'code' => 'required|integer|unique:products,code',
-            'brands_id' => 'integer|exists:brands,id',
-            'subcatigories_id' => 'integer|exists:subcatigories,id',
-            'image' => 'required|image'
-        ]);
 
         //upload image
         $imageName = '';
