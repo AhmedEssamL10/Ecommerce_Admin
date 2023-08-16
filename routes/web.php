@@ -17,10 +17,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('dashboard');
 })->name('home');
-Route::get('/products/all', [ProductController::class, 'index'])->name('products.index');
-//create
-Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
-Route::post('/products/store', [ProductController::class, 'store'])->name('products.store');
-Route::get('/products/edit/{id}', [ProductController::class, 'edit'])->name('products.edit');
-Route::put('/products/update/{id}', [ProductController::class, 'update'])->name('products.update');
-Route::get('/products/delete/{id}', [ProductController::class, 'delete'])->name('products.delete');
+Route::prefix('products')->name('products.')->controller(ProductController::class)->group(function () { // routing group to make unrepeated code
+    Route::get('/all', 'index')->name('index');
+    //create
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/edit/{id}', 'edit')->name('edit');
+    Route::put('/update/{id}', 'update')->name('update');
+    Route::get('/delete/{id}', 'delete')->name('delete');
+});
