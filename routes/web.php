@@ -26,3 +26,7 @@ Route::prefix('products')->name('products.')->controller(ProductController::clas
     Route::put('/update/{id}', 'update')->name('update');
     Route::get('/delete/{id}', 'delete')->name('delete');
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

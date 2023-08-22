@@ -54,6 +54,7 @@
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">Contact</a>
                 </li>
+
             </ul>
 
             <!-- Right navbar links -->
@@ -870,7 +871,28 @@
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item">
+
+                                    @if (Route::has('login'))
+
+                                        @auth
+                                            <a href="{{ url('/home') }}"
+                                                class="text-sm text-gray-700 dark:text-gray-500 underline">Home</a>
+                                        @else
+                                            <a href="{{ route('login') }}"
+                                                class="text-sm text-gray-700 dark:text-gray-500 underline">Log
+                                                in </a>
+                                            /
+                                            @if (Route::has('register'))
+                                                <a href="{{ route('register') }}"
+                                                    class="ml-1 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
+                                            @endif
+                                        @endauth
+
+                                    @endif
+                                </li>
                                 <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+
                                 <li class="breadcrumb-item active">@yield('title')</li>
                             </ol>
                         </div><!-- /.col -->
