@@ -20,8 +20,8 @@ Route::get('/', function () {
 });
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->name('home');
-Route::prefix('products')->name('products.')->controller(ProductController::class)->group(function () { // routing group to make unrepeated code
+})->middleware('verified')->name('home');
+Route::prefix('products')->middleware('verified')->name('products.')->controller(ProductController::class)->group(function () { // routing group to make unrepeated code
     Route::get('/all', 'index')->name('index');
     //create
     Route::get('/create', 'create')->name('create');
@@ -31,6 +31,7 @@ Route::prefix('products')->name('products.')->controller(ProductController::clas
     Route::get('/delete/{id}', 'delete')->name('delete');
 });
 
-Auth::routes();
+// Auth::routes(['register' => false]); //to make register desabled
+Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
