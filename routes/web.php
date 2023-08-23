@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProductController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    return view('auth.login');
+});
+Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('home');
 Route::prefix('products')->name('products.')->controller(ProductController::class)->group(function () { // routing group to make unrepeated code

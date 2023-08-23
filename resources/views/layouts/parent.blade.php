@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title')</title>
-
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -28,7 +28,9 @@
     <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
     <!-- summernote -->
     <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css') }}">
+
     @yield('css')
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -182,6 +184,32 @@
                         <i class="fas fa-th-large"></i>
                     </a>
                 </li>
+                <li class="nav-item dropdown">
+
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        {{ Auth::user()->name }}
+                    </a>
+
+                    {{-- @guest
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            Guest
+                        </a> --}}
+                    {{-- @endguest --}}
+
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                         document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </div>
+                </li>
             </ul>
         </nav>
         <!-- /.navbar -->
@@ -204,7 +232,13 @@
                             alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">@yield('name', 'Ahmed Essam')</a>
+                        @auth
+                            <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+                        @endauth
+                        @guest
+                            <a href="#" class="d-block">Guest</a>
+                        @endguest
+
                     </div>
                 </div>
 
@@ -871,26 +905,6 @@
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item">
-
-                                    @if (Route::has('login'))
-
-                                        @auth
-                                            <a href="{{ url('/home') }}"
-                                                class="text-sm text-gray-700 dark:text-gray-500 underline">Home</a>
-                                        @else
-                                            <a href="{{ route('login') }}"
-                                                class="text-sm text-gray-700 dark:text-gray-500 underline">Log
-                                                in </a>
-                                            /
-                                            @if (Route::has('register'))
-                                                <a href="{{ route('register') }}"
-                                                    class="ml-1 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
-                                            @endif
-                                        @endauth
-
-                                    @endif
-                                </li>
                                 <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
 
                                 <li class="breadcrumb-item active">@yield('title')</li>
