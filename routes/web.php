@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +22,7 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware('verified')->name('home');
+//products
 Route::prefix('products')->middleware('verified')->name('products.')->controller(ProductController::class)->group(function () { // routing group to make unrepeated code
     Route::get('/all', 'index')->name('index');
     //create
@@ -30,8 +32,14 @@ Route::prefix('products')->middleware('verified')->name('products.')->controller
     Route::put('/update/{id}', 'update')->name('update');
     Route::get('/delete/{id}', 'delete')->name('delete');
 });
+// brands
+Route::prefix('brands')->middleware('verified')->name('brands.')->controller(BrandController::class)->group(function () {
+    Route::get('/all', 'index')->name('index');
+});
+
+
 
 // Auth::routes(['register' => false]); //to make register desabled
 Auth::routes(['verify' => true]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -1,5 +1,5 @@
 @extends('layouts.parent')
-@section('title', 'Products Table')
+@section('title', 'Brands Table')
 @section('contant')
     @include('includes.messages')
     <!-- Main content -->
@@ -17,49 +17,32 @@
                                         <th>ID</th>
                                         <th>En Name</th>
                                         <th>Ar Name</th>
-                                        <th>Image</th>
-                                        <th>Quantity</th>
-                                        <th>Code</th>
-                                        <th>Price</th>
                                         <th>Status</th>
-                                        {{-- <th>En Detiles</th>
-                                        <th>Ar Detiles</th> --}}
-                                        <th>Brand Id</th>
-                                        <th>Subcatigory Id</th>
                                         <th>Created at</th>
                                         <th>Updated at</th>
                                         <th>Operations</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($products as $product)
+                                    @foreach ($brands as $brand)
                                         <tr>
-                                            <td>{{ $product->id }}</td>
-                                            <td>{{ $product->en_name }} </td>
-                                            <td>{{ $product->ar_name }}</td>
-                                            <td> {{ $product->image }}</td>
-                                            <td>{{ $product->quantity }}</td>
-                                            <td>{{ $product->code }}</td>
-                                            <td>{{ $product->price }}</td>
-                                            @if ($product->status == 0)
+                                            <td>{{ $brand->id }}</td>
+                                            <td>{{ $brand->en_name }} </td>
+                                            <td>{{ $brand->ar_name }}</td>
+                                            @if ($brand->status == 0)
                                                 <td> inActive </td>
                                             @else
                                                 <td> Active </td>
                                             @endif
-                                            {{-- <td>{{ $product->status }}</td> --}}
-                                            {{-- <td>{{ $product->detiles_en }}</td>
-                                            <td>{{ $product->detiles_ar }}</td> --}}
-                                            <td>{{ $product->brands_id }}</td>
-                                            <td>{{ $product->subcatigories_id }}</td>
-                                            <td>{{ $product->created_at }}</td>
-                                            <td>{{ $product->updated_at }}</td>
+                                            <td>{{ $brand->created_at }}</td>
+                                            <td>{{ $brand->updated_at }}</td>
                                             <td>
 
                                                 {{-- <div class="row"> --}}
-                                                <a href="{{ route('products.delete', $product->id) }}"
+                                                <a href="{{ route('products.delete', $brand->id) }}"
                                                     class="btn btn-outline-danger">
                                                     Delete</a>
-                                                <a href="{{ route('products.edit', $product->id) }}"
+                                                <a href="{{ route('products.edit', $brand->id) }}"
                                                     class="btn btn-outline-warning">
                                                     Edit </a>
 
