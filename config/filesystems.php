@@ -33,6 +33,10 @@ return [
             'driver' => 'local',
             'root' => 'E:\projects\htdocs\ecommerce project\assets\img\product',
         ],
+        'external-2' => [
+            'driver' => 'local',
+            'root' => 'E:\projects\htdocs\ecommerce project\assets\img\brand-logo',
+        ],
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),

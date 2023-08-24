@@ -35,6 +35,9 @@ Route::prefix('products')->middleware('verified')->name('products.')->controller
 // brands
 Route::prefix('brands')->middleware('verified')->name('brands.')->controller(BrandController::class)->group(function () {
     Route::get('/all', 'index')->name('index');
+    //create
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
 });
 
 

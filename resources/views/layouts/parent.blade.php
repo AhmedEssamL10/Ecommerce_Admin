@@ -300,10 +300,10 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                {{-- <a href="{{ route('brands.create') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Create Brands</p>
-                                    </a> --}}
+                                <a href="{{ route('brands.create') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Create Brands</p>
+                                </a>
                             </li>
 
                         </ul>

@@ -17,6 +17,7 @@
                                         <th>ID</th>
                                         <th>En Name</th>
                                         <th>Ar Name</th>
+                                        <th>Image</th>
                                         <th>Status</th>
                                         <th>Created at</th>
                                         <th>Updated at</th>
@@ -29,6 +30,7 @@
                                             <td>{{ $brand->id }}</td>
                                             <td>{{ $brand->en_name }} </td>
                                             <td>{{ $brand->ar_name }}</td>
+                                            <td>{{ $brand->image }}</td>
                                             @if ($brand->status == 0)
                                                 <td> inActive </td>
                                             @else
