@@ -41,6 +41,8 @@ Route::prefix('brands')->middleware('verified')->name('brands.')->controller(Bra
     //edit
     Route::get('/edit/{id}', 'edit')->name('edit');
     Route::post('/update/{id}', 'update')->name('update');
+    //delete
+    Route::get('/delete/{id}', 'delete')->name('delete');
 });
 
 

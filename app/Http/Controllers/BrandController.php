@@ -81,4 +81,16 @@ class BrandController extends Controller
         ]);
         return  redirect(route('brands.index'))->with('success', 'the brand updated successfully');
     }
+    public function delete($id)
+    {
+        $path = public_path('images\brand-logo');
+        $dbimage = DB::table('brands')->select('image')->where('id', '=', $id)->first();
+        $oldpath1 = $path . '\\' . $dbimage->image;
+        if (file_exists($oldpath1)) {
+            unlink($oldpath1);
+        }
+        Storage::disk('external-2')->delete($dbimage->image);
+        DB::table('brands')->where('id', '=', $id)->delete();
+        return back()->with('success', 'the brand deleted successfully');
+    }
 }
