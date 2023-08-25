@@ -38,11 +38,14 @@ Route::prefix('brands')->middleware('verified')->name('brands.')->controller(Bra
     //create
     Route::get('/create', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
+    //edit
+    Route::get('/edit/{id}', 'edit')->name('edit');
+    Route::post('/update/{id}', 'update')->name('update');
 });
 
 
 
 // Auth::routes(['register' => false]); //to make register desabled
-Auth::routes(['verify' => true]);
+Auth::routes(['verify' => true, 'register' => false]);
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

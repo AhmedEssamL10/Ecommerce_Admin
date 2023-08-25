@@ -31,7 +31,7 @@ class BrandController extends Controller
             $image = $request->file('image');
             $extention = $image->getClientOriginalExtension();
             $imageName = 'brand-' . uniqid() . '.' . $extention;
-            $path = public_path('iamges/brand-logo');
+            $path = public_path('images/brand-logo');
             Storage::disk('external-2')->put($imageName, file_get_contents($image));
             $image->move($path, $imageName);
         }
@@ -42,5 +42,43 @@ class BrandController extends Controller
             'image' => $imageName,
         ]);
         return redirect(route('brands.index'))->with('success', 'the brand create successfully');
+    }
+    public function edit($id)
+    {
+        $brands = DB::table('brands')->where('id', '=', $id)->first();
+        return view('CRUD.Brands.edit', compact('brands'));
+    }
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'en_name' => 'required|max:32',
+            'ar_name' => 'required|max:32',
+            'status' => 'required|in:0,1',
+            'image' => 'image'
+        ]);
+        $dbimage = DB::table('brands')->select('image')->where('id', '=', $id)->first();
+        $imageName = $dbimage->image;
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $extention = $image->getClientOriginalExtension();
+            $imageName = 'brands-' . uniqid() . '.' . $extention;
+            Storage::disk('external-2')->put($imageName, file_get_contents($image));
+            $path = public_path('images\brand-logo');
+            $dbimage = DB::table('brands')->select('image')->where('id', '=', $id)->first();
+            $oldpath1 = $path . '\\' . $dbimage->image;
+            if (file_exists($oldpath1)) {
+                unlink($oldpath1);
+            }
+            Storage::disk('external-2')->delete($dbimage->image);
+
+            $image->move($path, $imageName);
+        }
+        DB::table('brands')->where('id', '=', $id)->update([
+            'en_name' => $request->en_name,
+            'ar_name' => $request->ar_name,
+            'status' => $request->status,
+            'image' => $imageName,
+        ]);
+        return  redirect(route('brands.index'))->with('success', 'the brand updated successfully');
     }
 }

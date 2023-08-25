@@ -44,7 +44,7 @@
                                                 <a href="{{ route('products.delete', $brand->id) }}"
                                                     class="btn btn-outline-danger">
                                                     Delete</a>
-                                                <a href="{{ route('products.edit', $brand->id) }}"
+                                                <a href="{{ route('brands.edit', $brand->id) }}"
                                                     class="btn btn-outline-warning">
                                                     Edit </a>
 
