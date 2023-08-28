@@ -50,4 +50,9 @@ class CatigoryController extends Controller
         ]);
         return redirect(route('catigories.index'))->with('success', 'the brand updated successfully');
     }
+    public function delete($id)
+    {
+        DB::table('catigories')->where('id', '=', $id)->delete();
+        return redirect(route('catigories.index'))->with('success', 'the brand deleted successfully');
+    }
 }
