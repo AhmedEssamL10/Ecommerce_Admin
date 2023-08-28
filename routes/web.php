@@ -51,6 +51,11 @@ Route::prefix('catigories')->middleware('verified')->name('catigories.')->contro
     //create
     Route::get('/create', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
+    //edit
+    Route::get('/edit/{id}', 'edit')->name('edit');
+    Route::post('/update/{id}', 'update')->name('update');
+    //delete
+    Route::get('/delete/{id}', 'delete')->name('delete');
 });
 
 

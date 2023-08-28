@@ -31,4 +31,23 @@ class CatigoryController extends Controller
         ]);
         return redirect(route('catigories.index'))->with('success', 'the brand created successfully');
     }
+    public function edit($id)
+    {
+        $catigories = DB::table('catigories')->where('id', '=', $id)->first();
+        return view('CRUD.Catigories.edit', compact('catigories'));
+    }
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'en_name' => 'required|max:32',
+            'ar_name' => 'required|max:32',
+            'status' => 'required|in:0,1'
+        ]);
+        DB::table('catigories')->where('id', '=', $id)->update([
+            'en_name' => $request->en_name,
+            'ar_name' => $request->ar_name,
+            'status' => $request->status,
+        ]);
+        return redirect(route('catigories.index'))->with('success', 'the brand updated successfully');
+    }
 }

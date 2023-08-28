@@ -40,10 +40,10 @@
                                             <td>
 
                                                 {{-- <div class="row"> --}}
-                                                <a href="{{ route('brands.delete', $catigory->id) }}"
+                                                <a href="{{ route('catigories.delete', $catigory->id) }}"
                                                     class="btn btn-outline-danger">
                                                     Delete</a>
-                                                <a href="{{ route('brands.edit', $catigory->id) }}"
+                                                <a href="{{ route('catigories.edit', $catigory->id) }}"
                                                     class="btn btn-outline-warning">
                                                     Edit </a>
 
