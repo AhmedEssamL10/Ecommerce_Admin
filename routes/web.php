@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CatigoryController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -44,7 +45,10 @@ Route::prefix('brands')->middleware('verified')->name('brands.')->controller(Bra
     //delete
     Route::get('/delete/{id}', 'delete')->name('delete');
 });
-
+// catigories
+Route::prefix('catigories')->middleware('verified')->name('catigories.')->controller(CatigoryController::class)->group(function () {
+    Route::get('/all', 'index')->name('index');
+});
 
 
 // Auth::routes(['register' => false]); //to make register desabled

@@ -308,6 +308,30 @@
 
                         </ul>
                     </li>
+                    <li class="nav-item menu">
+                        <a href="#" class="nav-link active">
+                            <i class="nav-icon fas fa-th"></i>
+                            <p>
+                                Catigories
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('catigories.index') }}" class="nav-link active">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>All Catigories</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                {{-- <a href="{{ route('Catigories.create') }}" class="nav-link"> --}}
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Create Catigories</p>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
                     {{--   <li class="nav-item">
                             <a href="pages/widgets.html" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
